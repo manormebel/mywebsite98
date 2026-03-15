@@ -127,6 +127,7 @@ html, body {
   gap: 48px;
   align-items: center;
   max-width: 100%;
+  padding-left: 24px;
 }
 .hero h1 span {
   display: block;
@@ -585,6 +586,7 @@ h2 {
     grid-template-columns: 1.1fr 0.9fr; 
     gap: 48px; 
     align-items: center; 
+    padding-left: 24px; 
   }
   .hero-text { 
     text-align: left; 
