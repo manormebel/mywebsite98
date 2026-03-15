@@ -127,8 +127,6 @@ html, body {
   gap: 48px;
   align-items: center;
   max-width: 100%;
-  margin: 0 auto;
-  padding: 0 20px;
 }
 .hero h1 span {
   display: block;
@@ -581,7 +579,34 @@ h2 {
   .tools .tools-rail { grid-template-columns: 1fr; }
   .tools .tools-tiles { grid-template-columns: repeat(3, minmax(120px, 1fr)); }
 }
-@media (max-width: 760px) {
+@media (min-width: 769px) {
+  .hero-inner { 
+    display: grid; 
+    grid-template-columns: 1.1fr 0.9fr; 
+    gap: 48px; 
+    align-items: center; 
+  }
+  .hero-text { 
+    text-align: left; 
+  }
+  .social-proof { 
+    display: grid; 
+    grid-template-columns: repeat(3, max-content); 
+    gap: 18px 24px; 
+    align-items: center; 
+    margin-top: 16px; 
+  }
+  .hero-ctas { 
+    display: flex; 
+    gap: 12px; 
+    margin-top: 20px; 
+  }
+  .hero-ctas .btn { 
+    max-width: none; 
+    width: auto; 
+  }
+}
+@media (max-width: 768px) {
   :root { --container: 560px; }
   .nav-links { display: none; }
   .hero { padding-top: 64px; }
