@@ -588,7 +588,31 @@ h2 {
   h1 { font-size: 44px; line-height: 50px; }
   h2 { font-size: 32px; line-height: 36px; }
   .eyebrow { font-size: 11px; letter-spacing: 1.1px; }
-  .hero-text { padding: 0 16px; }
+  .hero-text { padding: 0 16px; text-align: center; }
+  .hero-inner { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+  }
+  .social-proof { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 8px; 
+    margin-top: 20px; 
+  }
+  .hero-ctas { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 12px; 
+    margin-top: 24px; 
+  }
+  .hero-ctas .btn { 
+    max-width: 280px; 
+    width: 100%; 
+  }
   .showcase-grid { grid-template-columns: repeat(2, 180px); justify-content: center; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .features-list .feature-tags { padding: 0 16px; gap: 10px 12px; }
