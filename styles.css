@@ -117,6 +117,9 @@ html, body {
 }
 .hero {
   padding: 88px 0 40px;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 .hero-inner {
   display: grid;
@@ -124,9 +127,12 @@ html, body {
   gap: 48px;
   align-items: center;
   max-width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 .hero h1 span {
   display: block;
+  word-wrap: break-word;
 }
 .eyebrow {
   font-size: 12px;
@@ -149,6 +155,7 @@ h1 {
   line-height: 26px;
   color: #c9c9c9;
   max-width: 640px;
+  word-wrap: break-word;
 }
 .social-proof {
   display: grid;
@@ -603,6 +610,7 @@ h2 {
   .container { padding-left: 16px; padding-right: 16px; }
   .nav-inner { padding: 0 16px; }
   .img-placeholder { margin: 0 auto; }
+  .hero-inner { padding: 0 12px; }
 }
 @media (max-width: 375px) {
   .eyebrow { font-size: 9px; letter-spacing: 0.9px; }
